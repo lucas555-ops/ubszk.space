@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UBS ZK Space — Sovereign ZK Infrastructure for Storage & Compute</title>
+  <meta name="description" content="UBS ZK Space Network — sovereign Layer‑1 for zero‑knowledge storage and compute. PoSpace + VDF consensus, privacy at L1, modular Substrate stack. Early contributions: voluntary, off‑chain, non‑binding." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
+    html,body{background:linear-gradient(180deg,rgba(5,8,18,.9),rgba(5,8,18,1)) no-repeat var(--bg); color:#e8eefc; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.08)}
+    .chip{border:1px solid rgba(255,255,255,.12)}
+    .gradient{background:linear-gradient(90deg,var(--brand),var(--brand2));}
+    .link{color:#9bd3ff}
+    .muted{color:var(--muted)}
+    .shadow-soft{box-shadow:0 10px 30px rgba(10,20,40,.3)}
+    .flag{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.1);padding:.35rem .6rem;border-radius:.6rem}
+    .prose li{margin-left:1rem}
+  </style>
+  <!-- OpenGraph -->
+  <meta property="og:title" content="UBS ZK Space — Sovereign ZK Infrastructure" />
+  <meta property="og:description" content="PoSpace + VDF. Privacy at Layer‑1. Modular stack. Early contributions welcome." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ubszk.space" />
+  <meta property="og:image" content="https://ubszk.space/og.png" />
+  <!-- JSON‑LD (Organization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "UBS ZK Space Network",
+    "url": "https://ubszk.space",
+    "sameAs": ["https://linktr.ee/UBSZK"],
+    "description": "Sovereign L1 for ZK storage & compute. PoSpace + VDF, privacy at L1.",
+    "foundingDate": "2025"
+  }
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-[#070b18]/70 backdrop-blur border-b border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl gradient"></div>
+        <span class="font-semibold tracking-tight">UBS ZK Space</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#tech" class="hover:text-white muted">Tech</a>
+        <a href="#token" class="hover:text-white muted">Token/Contrib</a>
+        <a href="#legal" class="hover:text-white muted">Legal</a>
+        <a href="#docs" class="hover:text-white muted">Docs</a>
+        <a href="#team" class="hover:text-white muted">Team</a>
+        <a href="#faq" class="hover:text-white muted">FAQ</a>
+        <a href="#contact" class="hover:text-white muted">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="btnEN" class="flag" aria-label="English">EN</button>
+        <button id="btnRU" class="flag" aria-label="Русский">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-[.15]" aria-hidden>
+      <div class="absolute -top-32 -right-16 w-[600px] h-[600px] rounded-full blur-3xl gradient"></div>
+    </div>
+    <div class="mx-auto max-w-7xl px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight" data-i18n="hero_title">
+          Sovereign ZK Infrastructure for Storage & Compute
+        </h1>
+        <p class="mt-4 text-lg muted" data-i18n="hero_sub">
+          Proof‑of‑Space + VDF consensus. Privacy at Layer‑1. Modular Substrate stack. We welcome voluntary early contributions to accelerate Testnet → Mainnet.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📄 Pitch Deck</a>
+          <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📘 Litepaper</a>
+          <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">⚙️ Technical WP</a>
+          <a href="#contact" class="px-5 py-2 rounded-xl gradient shadow-soft font-semibold">Join Early Contributions</a>
+        </div>
+        <p class="mt-4 text-sm muted">Open‑source protocol • No token sale • Utility‑only</p>
+      </div>
+      <div class="glass rounded-2xl p-6 border grid gap-4">
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-xl bg-white/5">
+            <div class="text-2xl font-bold">PoSpace + VDF</div>
+            <div class="muted mt-1" data-i18n="hero_point1">Green, fair, ASIC‑resistant consensus</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5">
+            <div class="text-2xl font-bold">ZK @ L1</div>
+            <div class="muted mt-1" data-i18n="hero_point2">Privacy by default, not a rollup</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5">
+            <div class="text-2xl font-bold">$3/TB/yr</div>
+            <div class="muted mt-1" data-i18n="hero_point3">HDD/SSD mining, no GPUs</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white/5">
+            <div class="text-2xl font-bold">Modular</div>
+            <div class="muted mt-1" data-i18n="hero_point4">Substrate • WASM • ink! • IBC</div>
+          </div>
+        </div>
+        <a href="https://linktr.ee/UBSZK" target="_blank" class="link text-sm">🔗 Linktree / UBSZK</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech -->
+  <section id="tech" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 border">
+        <h3 class="text-xl font-semibold">Consensus</h3>
+        <p class="muted mt-2" data-i18n="tech_consensus">Proof‑of‑Space + dual VDF with GRANDPA finality. Fair timing, Sybil‑resistant, energy‑efficient.</p>
+        <ul class="prose mt-3 text-sm muted list-disc">
+          <li data-i18n="tech_c1">1 TB min entry • no staking • no GPUs</li>
+          <li data-i18n="tech_c2">Deterministic time via VDF • anti‑front‑running</li>
+          <li data-i18n="tech_c3">Honest leader election • ASIC resistance</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h3 class="text-xl font-semibold">Privacy Layer</h3>
+        <p class="muted mt-2" data-i18n="tech_privacy">OpenZKP integrated at runtime (ZK‑ID, private DAOs, proof aggregation) — privacy at L1.</p>
+        <ul class="prose mt-3 text-sm muted list-disc">
+          <li data-i18n="tech_p1">SNARK‑friendly hashes: Knapsack, Rescue, Haraka</li>
+          <li data-i18n="tech_p2">Groth16/PLONK‑class circuits • aggregation</li>
+          <li data-i18n="tech_p3">No rollup dependency • L1‑native privacy</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h3 class="text-xl font-semibold">Full‑Stack</h3>
+        <p class="muted mt-2" data-i18n="tech_stack">Substrate node, GUI/CLI, browser signer, Nix/Docker CI — production‑ready from day one.</p>
+        <ul class="prose mt-3 text-sm muted list-disc">
+          <li data-i18n="tech_s1">GTK4 Desktop (30 MB) • cross‑platform</li>
+          <li data-i18n="tech_s2">Reproducible Nix • multistage Docker</li>
+          <li data-i18n="tech_s3">GitHub Actions • telemetry • monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Token & Contributions -->
+  <section id="token" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <div class="glass rounded-2xl p-8 border">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold" data-i18n="token_title">Token & Contribution Model</h3>
+          <ul class="list-disc pl-5 mt-3 space-y-2 muted">
+            <li data-i18n="token_point1">Ticker: UBS • Fixed supply 1B • Emission ~7 years</li>
+            <li data-i18n="token_point2">Distribution: Farmers 45% • Validators 20% • Ecosystem 10% • Team 10% • Strategic & Liquidity 15%</li>
+            <li data-i18n="token_point3">No public sales, no SAFE/SAFT • Access via voluntary, off‑chain contributions</li>
+            <li data-i18n="token_point4">Current target: <span class="text-white font-semibold">$200K</span> early contributions (Testnet → Mainnet)</li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl bg-white/5">
+            <div class="font-semibold" data-i18n="contrib_how">How to participate</div>
+            <ol class="list-decimal pl-5 mt-2 text-sm muted space-y-1">
+              <li data-i18n="contrib_step1">Review the docs (Pitch, Litepaper, Tech WP, Legal Memo)</li>
+              <li data-i18n="contrib_step2">Send intro with background & intent (ecosystem, infra, strategic)</li>
+              <li data-i18n="contrib_step3">Proceed with an off‑chain contribution letter (non‑binding, voluntary)</li>
+            </ol>
+          </div>
+          <a href="#contact" class="block text-center px-5 py-3 rounded-xl gradient shadow-soft font-semibold">🚀 Join Early Contributions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal -->
+  <section id="legal" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold">What UBS is</h4>
+        <p class="muted mt-2 text-sm" data-i18n="legal_is">Open‑source L1 protocol. Utility‑only token for mining & services. Community‑driven development.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold">What UBS is not</h4>
+        <p class="muted mt-2 text-sm" data-i18n="legal_not">Not a company, fund, or public offering. No token sales, no guarantees, no financial products.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold">Disclaimers</h4>
+        <p class="muted mt-2 text-sm" data-i18n="legal_disclaimer">Participation is voluntary and at your own risk. Docs are informational; code governs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Docs -->
+  <section id="docs" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <h3 class="text-2xl font-bold mb-6">Documentation</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="#" data-doc="pitch">
+        <div class="text-lg font-semibold">Pitch Deck (EN)</div>
+        <p class="muted text-sm mt-1">Slides overview for investors</p>
+      </a>
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="#" data-doc="lite">
+        <div class="text-lg font-semibold">Litepaper (EN)</div>
+        <p class="muted text-sm mt-1">8‑page executive summary</p>
+      </a>
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="#" data-doc="white">
+        <div class="text-lg font-semibold">Technical Whitepaper (EN)</div>
+        <p class="muted text-sm mt-1">Consensus, ZK runtime, stack</p>
+      </a>
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="#" data-doc="legal">
+        <div class="text-lg font-semibold">Legal & Regulatory Memo</div>
+        <p class="muted text-sm mt-1">Positioning & exclusions</p>
+      </a>
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="#" data-doc="doctrine">
+        <div class="text-lg font-semibold">Doctrine of Infrastructure Anarchism</div>
+        <p class="muted text-sm mt-1">Philosophy & principles</p>
+      </a>
+      <a class="glass rounded-2xl p-6 border hover:border-white/20" href="https://linktr.ee/UBSZK" target="_blank">
+        <div class="text-lg font-semibold">Linktree</div>
+        <p class="muted text-sm mt-1">All links in one place</p>
+      </a>
+    </div>
+    <p class="muted text-xs mt-4">Note: Place your PDFs into <code>/docs</code> and set the exact filenames in <code>DOC_URLS</code> below.</p>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <h3 class="text-2xl font-bold mb-6" data-i18n="team_title">Team</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 border">
+        <div class="text-lg font-semibold">Eldar V.</div>
+        <div class="muted text-sm" data-i18n="team_member1_role">Architect of UBS ZK Space (consensus & infrastructure)</div>
+        <ul class="text-sm muted mt-3 list-disc pl-4">
+          <li>10+ years in systems engineering & blockchain R&D</li>
+          <li>Vision for sovereign storage & ZK‑first consensus</li>
+          <li>Bridges protocols and people</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <div class="text-lg font-semibold">Rustam L.</div>
+        <div class="muted text-sm" data-i18n="team_member2_role">Co‑Founder — ZK/DePIN, Ecosystem & Strategy</div>
+        <ul class="text-sm muted mt-3 list-disc pl-4">
+          <li>Web3 economics, growth, and ecosystem launches</li>
+          <li>Operator mindset: token design & market entry</li>
+          <li>Known as “Crypto Operator‑as‑a‑Service”</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <div class="text-lg font-semibold">Protocol Engineer</div>
+        <div class="muted text-sm" data-i18n="team_member3_role">ZK Runtime & Systems Lead</div>
+        <ul class="text-sm muted mt-3 list-disc pl-4">
+          <li>zk‑circuits, Substrate runtime, modular L1 design</li>
+          <li>DevOps pipelines, consensus integration</li>
+          <li>Integrator mindset: consensus ↔ product</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech FAQ -->
+  <section id="faq" class="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <h3 class="text-2xl font-bold mb-6" data-i18n="faq_title">Tech FAQ</h3>
+    <div class="space-y-6">
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold" data-i18n="faq_q1">How does PoSpace + dual VDF work?</h4>
+        <p class="muted mt-2 text-sm" data-i18n="faq_a1">Farmers pre‑allocate real disk space (e.g., 1 TB) and prove it via PoSpace. When a plot qualifies, a two‑stage VDF enforces sequential compute time that cannot be parallelized or accelerated, ensuring fair leader selection and ASIC resistance.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold" data-i18n="faq_q2">Which ZK schemes are used?</h4>
+        <p class="muted mt-2 text-sm" data-i18n="faq_a2">A runtime‑integrated OpenZKP engine (SNARK‑friendly hashes: Knapsack, Rescue, Haraka) powers zk‑ID, private DAOs, mixers, and proof aggregation. Groth16/PLONK‑class circuits are supported with a path to universal setups.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 border">
+        <h4 class="font-semibold" data-i18n="faq_q3">What is the network throughput?</h4>
+        <p class="muted mt-2 text-sm" data-i18n="faq_a3">BFT finality (GRANDPA) targets 6–18s with optimized ZK aggregation enabling high tx throughput. Storage throughput scales horizontally with the number of farmers; economics modeled around ~$3/TB/year HDD/SSD participation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team / Contacts -->
+  <section id="contact" class="mx-auto max-w-7xl px-4 py-12 md:py-20">
+    <div class="glass rounded-2xl p-8 border grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-2xl font-bold" data-i18n="contact_title">Get in touch / Join Early Contributions</h3>
+        <p class="muted mt-2" data-i18n="contact_text">Ecosystem builders, infrastructure partners, and strategic contributors are welcome. Send a short intro and we’ll follow up with contribution details.</p>
+        <div class="mt-5 grid gap-2 text-sm">
+          <a class="link" href="https://t.me/EldarUBSZK" target="_blank">Telegram: @EldarUBSZK</a>
+          <a class="link" href="https://linktr.ee/UBSZK" target="_blank">Linktree: UBSZK</a>
+          <a class="link" href="mailto:ops@ubszk.space">Email: ops@ubszk.space</a>
+        </div>
+      </div>
+      <form class="grid gap-3" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <div>
+          <label class="text-sm muted">Name</label>
+          <input required name="name" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="Your name" />
+        </div>
+        <div>
+          <label class="text-sm muted">Email / Telegram</label>
+          <input required name="contact" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="email@domain.com or @handle" />
+        </div>
+        <div>
+          <label class="text-sm muted">Message</label>
+          <textarea required name="message" rows="4" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="Background & how you want to contribute"></textarea>
+        </div>
+        <button class="mt-2 px-5 py-3 rounded-xl gradient shadow-soft font-semibold" type="submit">Send</button>
+        <p class="muted text-xs">Submitting does not constitute any investment or offer. We’ll reach out with off‑chain contribution details.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-10 text-sm muted flex flex-col md:flex-row items-center justify-between gap-3">
+      <div>© <span id="year"></span> UBS ZK Space — Open‑source protocol.</div>
+      <div class="flex gap-4">
+        <a class="link" href="#legal">Legal</a>
+        <a class="link" href="https://github.com/ubszk" target="_blank">GitHub</a>
+        <a class="link" href="https://linktr.ee/UBSZK" target="_blank">Linktree</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Replace these URLs with your hosted PDFs before go‑live
+    const DOC_URLS = {
+      pitch: 'docs/pitch-deck.pdf',
+      lite:  'docs/litepaper.pdf',
+      white: 'docs/technical-whitepaper.pdf',
+      legal: 'docs/legal-memo.pdf',
+      doctrine: 'docs/doctrine.pdf'
+    };
+    document.querySelectorAll('[data-doc]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault(); const key=a.dataset.doc; const url=DOC_URLS[key]; if(url){ window.open(url,'_blank'); }
+      })
+    })
+
+    // ---- Language toggle (EN / RU)
+    const i18n = {
+      en: {
+        hero_title: 'Sovereign ZK Infrastructure for Storage & Compute',
+        hero_sub: 'Proof‑of‑Space + VDF consensus. Privacy at Layer‑1. Modular Substrate stack. We welcome voluntary early contributions to accelerate Testnet → Mainnet.',
+        hero_point1: 'Green, fair, ASIC‑resistant consensus',
+        hero_point2: 'Privacy by default, not a rollup',
+        hero_point3: 'HDD/SSD mining, no GPUs',
+        hero_point4: 'Substrate • WASM • ink! • IBC',
+        tech_consensus: 'Proof‑of‑Space + dual VDF with GRANDPA finality. Fair timing, Sybil‑resistant, energy‑efficient.',
+        tech_c1: '1 TB min entry • no staking • no GPUs',
+        tech_c2: 'Deterministic time via VDF • anti‑front‑running',
+        tech_c3: 'Honest leader election • ASIC resistance',
+        tech_privacy: 'OpenZKP integrated at runtime (ZK‑ID, private DAOs, proof aggregation) — privacy at L1.',
+        tech_p1: 'SNARK‑friendly hashes: Knapsack, Rescue, Haraka',
+        tech_p2: 'Groth16/PLONK‑class circuits • aggregation',
+        tech_p3: 'No rollup dependency • L1‑native privacy',
+        tech_stack: 'Substrate node, GUI/CLI, browser signer, Nix/Docker CI — production‑ready from day one.',
+        tech_s1: 'GTK4 Desktop (30 MB) • cross‑platform',
+        tech_s2: 'Reproducible Nix • multistage Docker',
+        tech_s3: 'GitHub Actions • telemetry • monitoring',
+        token_title: 'Token & Contribution Model',
+        token_point1: 'Ticker: UBS • Fixed supply 1B • Emission ~7 years',
+        token_point2: 'Distribution: Farmers 45% • Validators 20% • Ecosystem 10% • Team 10% • Strategic & Liquidity 15%',
+        token_point3: 'No public sales, no SAFE/SAFT • Access via voluntary, off‑chain contributions',
+        token_point4: 'Early contributions are voluntary and off‑chain, intended to accelerate Testnet → Mainnet',
+        contrib_how: 'How to participate',
+        contrib_step1: 'Review the docs (Pitch, Litepaper, Tech WP, Legal Memo)',
+        contrib_step2: 'Send intro with background & intent (ecosystem, infra, strategic)',
+        contrib_step3: 'Proceed with an off‑chain contribution letter (non‑binding, voluntary)',
+        contact_title: 'Get in touch / Join the $200K Pre‑Seed',
+        contact_text: 'Ecosystem builders, infrastructure partners, and strategic contributors are welcome. Send a short intro and we’ll follow up with contribution details.',
+        legal_is: 'Open‑source L1 protocol. Utility‑only token for mining & services. Community‑driven development.',
+        legal_not: 'Not a company, fund, or public offering. No token sales, no guarantees, no financial products.',
+        legal_disclaimer: 'Participation is voluntary and at your own risk. Docs are informational; code governs.',
+        faq_title: 'Tech FAQ',
+        faq_q1: 'How does PoSpace + dual VDF work?',
+        faq_a1: 'Farmers pre‑allocate real disk space (e.g., 1 TB) and prove it via PoSpace. When a plot qualifies, a two‑stage VDF enforces sequential compute time that cannot be parallelized or accelerated, ensuring fair leader selection and ASIC resistance.',
+        faq_q2: 'Which ZK schemes are used?',
+        faq_a2: 'A runtime‑integrated OpenZKP engine (SNARK‑friendly hashes: Knapsack, Rescue, Haraka) powers zk‑ID, private DAOs, mixers, and proof aggregation. Groth16/PLONK‑class circuits are supported with a path to universal setups.',
+        faq_q3: 'What is the network throughput?',
+        faq_a3: 'BFT finality (GRANDPA) targets 6–18s with optimized ZK aggregation enabling high tx throughput. Storage throughput scales horizontally with the number of farmers; economics modeled around ~$3/TB/year HDD/SSD participation.',
+        team_title: 'Team',
+        team_member1_role: 'Architect of UBS ZK Space (consensus & infrastructure)',
+        team_member2_role: 'Co‑Founder — ZK/DePIN, Ecosystem & Strategy',
+        team_member3_role: 'ZK Runtime & Systems Lead'
+      },
+      ru: {
+        hero_title: 'Суверенная ZK‑инфраструктура для хранения и вычислений',
+        hero_sub: 'Консенсус Proof‑of‑Space + VDF. Приватность на уровне L1. Модульный стек Substrate. Мы открыты к добровольным ранним взносам для ускорения Testnet → Mainnet.',
+        hero_point1: 'Зелёный, честный, ASIC‑резистентный консенсус',
+        hero_point2: 'Приватность по умолчанию, не через rollup',
+        hero_point3: 'Майнинг на HDD/SSD, без GPU',
+        hero_point4: 'Substrate • WASM • ink! • IBC',
+        tech_consensus: 'Proof‑of‑Space + двойной VDF и финальность GRANDPA. Честное время, устойчивость к Sybil, энергоэффективность.',
+        tech_c1: 'Минимум 1 ТБ • без стейкинга • без GPU',
+        tech_c2: 'Детерминированное время через VDF • анти‑фронт‑ран',
+        tech_c3: 'Честный выбор лидера • устойчивость к ASIC',
+        tech_privacy: 'OpenZKP встроен в рантайм (ZK‑ID, приватные DAO, агрегация доказательств) — приватность на L1.',
+        tech_p1: 'SNARK‑friendly хэши: Knapsack, Rescue, Haraka',
+        tech_p2: 'Схемы Groth16/PLONK • агрегация',
+        tech_p3: 'Без зависимости от rollup • приватность на L1',
+        tech_stack: 'Узел Substrate, GUI/CLI, браузерный signer, Nix/Docker CI — готово к продакшену.',
+        tech_s1: 'GTK4 Desktop (30 МБ) • кроссплатформенно',
+        tech_s2: 'Воспроизводимые окружения Nix • мульти‑стейдж Docker',
+        tech_s3: 'GitHub Actions • телеметрия • мониторинг',
+        token_title: 'Токен и модель вкладов',
+        token_point1: 'Тикер: UBS • Фиксированная эмиссия 1B • Выпуск ~7 лет',
+        token_point2: 'Распределение: Фермеры 45% • Валидаторы 20% • Экосистема 10% • Команда 10% • Стратегия и ликвидность 15%',
+        token_point3: 'Без публичных продаж, без SAFE/SAFT • Доступ через добровольные оффчейн‑вклады',
+        token_point4: 'Ранние взносы добровольные и оффчейн, предназначены для ускорения Testnet → Mainnet',
+        contrib_how: 'Как присоединиться',
+        contrib_step1: 'Ознакомьтесь с документами (Pitch, Litepaper, Tech WP, Legal Memo)',
+        contrib_step2: 'Пришлите краткое интро и роль (экосистема, инфраструктура, стратегия)',
+        contrib_step3: 'Оформим оффчейн‑письмо о вкладе (необязывающее, добровольное)',
+        contact_title: 'Связаться / Присоединиться к ранним взносам',
+        contact_text: 'Приглашаем билдеров экосистемы, инфраструктурных партнёров и стратегических контрибьюторов. Отправьте интро — ответим деталями.',
+        legal_is: 'Открытый L1‑протокол. Токен утилитарный: майнинг и сервисы. Развитие силами комьюнити.',
+        legal_not: 'Это не компания, не фонд и не публичное предложение. Нет продаж токенов, гарантий или финансовых продуктов.',
+        legal_disclaimer: 'Участие добровольное и на ваш риск. Документы информационные; управляет код.',
+        faq_title: 'Технический FAQ',
+        faq_q1: 'Как работает PoSpace + двойной VDF?',
+        faq_a1: 'Фермеры заранее выделяют реальное дисковое пространство (например, 1 ТБ) и доказывают это через PoSpace. При квалификации участка двухэтапный VDF навязывает последовательное вычисление, которое нельзя распараллелить, обеспечивая честный выбор лидера и устойчивость к ASIC.',
+        faq_q2: 'Какие ZK‑схемы используются?',
+        faq_a2: 'Встроенный в рантайм OpenZKP‑движок (SNARK‑friendly хэши: Knapsack, Rescue, Haraka) обеспечивает zk‑ID, приватные DAO, миксеры и агрегацию доказательств. Поддерживаются схемы уровня Groth16/PLONK с переходом к универсальным сетапам.',
+        faq_q3: 'Какова пропускная способность сети?',
+        faq_a3: 'BFT‑финальность (GRANDPA) нацелена на 6–18 с с оптимизированной ZK‑агрегацией для высокой транзакционной пропускной способности. Пропускная способность хранения масштабируется горизонтально числом фермеров; экономика смоделирована вокруг ~$3/ТБ/год на HDD/SSD.',
+        team_title: 'Команда',
+        team_member1_role: 'Архитектор UBS ZK Space (консенсус и инфраструктура)',
+        team_member2_role: 'Со‑основатель — ZK/DePIN, экосистема и стратегия',
+        team_member3_role: 'Руководитель ZK Runtime & Systems'
+      }
+    };
+    const setLang = (lang)=>{
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        el.textContent = i18n[lang][key] || el.textContent;
+      });
+      localStorage.setItem('lang', lang);
+    };
+    document.getElementById('btnEN').onclick=()=>setLang('en');
+    document.getElementById('btnRU').onclick=()=>setLang('ru');
+    setLang(localStorage.getItem('lang')||'en');
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
