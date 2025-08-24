@@ -319,17 +319,30 @@
   <script>
     // ---- Replace these URLs with your hosted PDFs before go‑live
     const DOC_URLS = {
-      pitch: 'docs/pitch-deck.pdf',
-      lite:  'docs/litepaper.pdf',
-      white: 'docs/technical-whitepaper.pdf',
-      legal: 'docs/legal-memo.pdf',
-      doctrine: 'docs/doctrine.pdf'
-    };
-    document.querySelectorAll('[data-doc]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault(); const key=a.dataset.doc; const url=DOC_URLS[key]; if(url){ window.open(url,'_blank'); }
-      })
-    })
+  en: {
+    pitch: 'docs/pitch-deck.pdf',
+    lite:  'docs/litepaper.pdf',
+    white: 'docs/technical-whitepaper.pdf',
+    legal: 'docs/legal-memo.pdf',
+    doctrine: 'docs/doctrine.pdf'
+  },
+  ru: {
+    pitch: 'docs/pitch-deck-ru.pdf',
+    lite:  'docs/litepaper-ru.pdf',
+    white: 'docs/technical-whitepaper-ru.pdf',
+    legal: 'docs/legal-memo-ru.pdf',
+    doctrine: 'docs/doctrine-ru.pdf'
+  }
+};
+let currentLang = localStorage.getItem('lang') || 'en';
+   document.querySelectorAll('[data-doc]').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const key = a.dataset.doc;
+    const url = (DOC_URLS[currentLang] && DOC_URLS[currentLang][key]) || '';
+    if (url) window.open(url, '_blank');
+  });
+});
 
     // ---- Language toggle (EN / RU)
     const i18n = {
@@ -429,7 +442,7 @@
         const key = el.getAttribute('data-i18n');
         el.textContent = i18n[lang][key] || el.textContent;
       });
-      localStorage.setItem('lang', lang);
+      setLang(currentLang);
     };
     document.getElementById('btnEN').onclick=()=>setLang('en');
     document.getElementById('btnRU').onclick=()=>setLang('ru');
