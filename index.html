@@ -324,24 +324,25 @@
 
   <script>
     // ---- Replace these URLs with your hosted PDFs before go‑live
-    const DOC_URLS = {
+const DOC_URLS = {
   en: {
     pitch: 'docs/pitch-deck.pdf',
     lite:  'docs/litepaper.pdf',
     white: 'docs/technical-whitepaper.pdf',
     legal: 'docs/legal-memo.pdf',
-    doctrine: 'docs/doctrine.pdf'
-    links:'https://linktr.ee/UBSZK'
+    doctrine: 'docs/doctrine.pdf',
+    links: 'https://linktr.ee/UBSZK'
   },
   ru: {
     pitch: 'docs/pitch-deck-ru.pdf',
     lite:  'docs/litepaper-ru.pdf',
     white: 'docs/technical-whitepaper-ru.pdf',
     legal: 'docs/legal-memo-ru.pdf',
-    doctrine: 'docs/doctrine-ru.pdf'
-    links:'https://t.me/UBSZK_ru_docs/3'
+    doctrine: 'docs/doctrine-ru.pdf',
+    links: 'https://t.me/UBSZK_ru_docs/3'
   }
 };
+
 let currentLang = localStorage.getItem('lang') || 'en';
    document.querySelectorAll('[data-doc]').forEach(a=>{
   a.addEventListener('click', (e)=>{
@@ -398,6 +399,20 @@ let currentLang = localStorage.getItem('lang') || 'en';
         team_member1_role: 'Founder — Consensus & Infra Architect',
         team_member2_role: 'Co‑Founder — ZK/DePIN, Ecosystem & Strategy',
         team_member3_role: 'ZK Runtime & Systems Lead'
+
+        docs_title: 'Documentation',
+docs_pitch_title: 'Pitch Deck (EN)',
+docs_pitch_desc: 'Slides overview for investors',
+docs_legal_title: 'Legal & Regulatory Memo',
+docs_legal_desc: 'Positioning & exclusions',
+docs_lite_title: 'Litepaper (EN)',
+docs_lite_desc: '8-page executive summary',
+docs_doctrine_title: 'Doctrine of Infrastructure Anarchism',
+docs_doctrine_desc: 'Philosophy & principles',
+docs_white_title: 'Technical Whitepaper (EN)',
+docs_white_desc: 'Consensus, ZK runtime, stack',
+docs_linktree_title: 'Linktree',
+docs_linktree_desc: 'All links in one place',
       },
       ru: {
   hero_title: 'Суверенная ZK‑инфраструктура для хранения и вычислений',
