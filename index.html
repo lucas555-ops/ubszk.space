@@ -523,6 +523,35 @@ setLang(currentLang);
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+  
+    // --- Обработчик отправки формы ---
+    const formEl = document.getElementById('contactForm');
+    if (formEl) {
+      formEl.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = formEl.querySelector('button[type=submit]');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        try {
+          const fd = new FormData(formEl);
+          const r = await fetch(formEl.action, { method: 'POST', body: fd });
+          if (r.ok) {
+            alert('✅ Thank you! Your message has been sent.');
+            formEl.reset();
+            // восстановим язык в скрытом поле
+            const cl = document.getElementById('contactLang');
+            if (cl) cl.value = currentLang;
+          } else {
+            alert('❌ Error sending message. Please try again later.');
+          }
+        } catch (err) {
+          alert('❌ Network error. Please try again later.');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Send';
+        }
+      });
+    }
   </script>
 </body>
 </html>
