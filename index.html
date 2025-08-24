@@ -295,23 +295,41 @@
 
         </div>
       </div>
-      <form class="grid gap-3" name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
-        <div>
-          <label class="text-sm muted">Name</label>
-          <input required name="name" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="Your name" />
-        </div>
-        <div>
-          <label class="text-sm muted">Email / Telegram</label>
-          <input required name="contact" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="email@domain.com or @handle" />
-        </div>
-        <div>
-          <label class="text-sm muted">Message</label>
-          <textarea required name="message" rows="4" class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30" placeholder="Background & how you want to contribute"></textarea>
-        </div>
-        <button class="mt-2 px-5 py-3 rounded-xl gradient shadow-soft font-semibold" type="submit">Send</button>
-        <p class="muted text-xs">Submitting does not constitute any investment or offer. We’ll reach out with off‑chain contribution details.</p>
-      </form>
+<form action="https://ubszk-form.lucas9589716.workers.dev"
+      method="POST"
+      class="grid gap-3"
+      id="contactForm">
+  <!-- honeypot (антиспам) -->
+  <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" />
+  <!-- язык сайта -->
+  <input type="hidden" name="lang" id="contactLang" value="">
+
+  <div>
+    <label class="text-sm muted">Name</label>
+    <input required name="name"
+           class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30"
+           placeholder="Your name" />
+  </div>
+  <div>
+    <label class="text-sm muted">Email / Telegram</label>
+    <input required name="contact"
+           class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30"
+           placeholder="email@domain.com or @handle" />
+  </div>
+  <div>
+    <label class="text-sm muted">Message</label>
+    <textarea required name="message" rows="4"
+              class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30"
+              placeholder="Background & how you want to contribute"></textarea>
+  </div>
+
+  <button class="mt-2 px-5 py-3 rounded-xl gradient shadow-soft font-semibold" type="submit">
+    Send
+  </button>
+  <p class="muted text-xs">
+    Submitting does not constitute any investment or offer. We’ll reach out with off-chain contribution details.
+  </p>
+</form>
     </div>
   </section>
 
@@ -492,6 +510,11 @@ const setLang = (lang) => {
       el.textContent = i18n[lang][key];
     }
   });
+
+  // обновляем скрытое поле формы, чтобы оно уехало в Telegram
+  const cl = document.getElementById('contactLang');
+  if (cl) cl.value = lang;
+
   localStorage.setItem('lang', lang);
 };
 
