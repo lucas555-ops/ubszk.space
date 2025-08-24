@@ -322,8 +322,8 @@
     </div>
   </footer>
 
-  <script>
-    // ---- Replace these URLs with your hosted PDFs before go‑live
+<script>
+/* 1) Ссылки на документы */
 const DOC_URLS = {
   en: {
     pitch: 'docs/pitch-deck.pdf',
@@ -344,147 +344,156 @@ const DOC_URLS = {
 };
 
 let currentLang = localStorage.getItem('lang') || 'en';
-   document.querySelectorAll('[data-doc]').forEach(a=>{
-  a.addEventListener('click', (e)=>{
+
+/* клики по карточкам доков */
+document.querySelectorAll('[data-doc]').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
     const key = a.dataset.doc;
-    const url = (DOC_URLS[currentLang] && DOC_URLS[currentLang][key]) || '';
+    const url = DOC_URLS[currentLang]?.[key];
     if (url) window.open(url, '_blank');
   });
 });
 
-    // ---- Language toggle (EN / RU)
-    const i18n = {
-      en: {
-        hero_title: 'Sovereign ZK Infrastructure for Storage & Compute',
-        hero_sub: 'Proof‑of‑Space + VDF consensus. Privacy at Layer‑1. Modular Substrate stack. We welcome voluntary early contributions to accelerate Testnet → Mainnet.',
-        hero_point1: 'Green, fair, ASIC‑resistant consensus',
-        hero_point2: 'Privacy by default, not a rollup',
-        hero_point3: 'HDD/SSD mining, no GPUs',
-        hero_point4: 'Substrate • WASM • ink! • IBC',
-        tech_consensus: 'Proof‑of‑Space + dual VDF with GRANDPA finality. Fair timing, Sybil‑resistant, energy‑efficient.',
-        tech_c1: '1 TB min entry • no staking • no GPUs',
-        tech_c2: 'Deterministic time via VDF • anti‑front‑running',
-        tech_c3: 'Honest leader election • ASIC resistance',
-        tech_privacy: 'OpenZKP integrated at runtime (ZK‑ID, private DAOs, proof aggregation) — privacy at L1.',
-        tech_p1: 'SNARK‑friendly hashes: Knapsack, Rescue, Haraka',
-        tech_p2: 'Groth16/PLONK‑class circuits • aggregation',
-        tech_p3: 'No rollup dependency • L1‑native privacy',
-        tech_stack: 'Substrate node, GUI/CLI, browser signer, Nix/Docker CI — production‑ready from day one.',
-        tech_s1: 'GTK4 Desktop (30 MB) • cross‑platform',
-        tech_s2: 'Reproducible Nix • multistage Docker',
-        tech_s3: 'GitHub Actions • telemetry • monitoring',
-        token_title: 'Token & Contribution Model',
-        token_point1: 'Ticker: UBS • Fixed supply 1B • Emission ~7 years',
-        token_point2: 'Distribution: Farmers 45% • Validators 20% • Ecosystem 10% • Team 10% • Strategic & Liquidity 15%',
-        token_point3: 'No public sales, no SAFE/SAFT • Access via voluntary, off‑chain contributions',
-        token_point4: 'Early contributions are voluntary and off‑chain, intended to accelerate Testnet → Mainnet',
-        contrib_how: 'How to participate',
-        contrib_step1: 'Review the docs (Pitch, Litepaper, Tech WP, Legal Memo)',
-        contrib_step2: 'Send intro with background & intent (ecosystem, infra, strategic)',
-        contrib_step3: 'Proceed with an off‑chain contribution letter (non‑binding, voluntary)',
-        contact_title: 'Get in touch / Join the $200K Pre‑Seed',
-        contact_text: 'Ecosystem builders, infrastructure partners, and strategic contributors are welcome. Send a short intro and we’ll follow up with contribution details.',
-        legal_is: 'Open‑source L1 protocol. Utility‑only token for mining & services. Community‑driven development.',
-        legal_not: 'Not a company, fund, or public offering. No token sales, no guarantees, no financial products.',
-        legal_disclaimer: 'Participation is voluntary and at your own risk. Docs are informational; code governs.',
-        faq_title: 'Tech FAQ',
-        faq_q1: 'How does PoSpace + dual VDF work?',
-        faq_a1: 'Farmers pre‑allocate real disk space (e.g., 1 TB) and prove it via PoSpace. When a plot qualifies, a two‑stage VDF enforces sequential compute time that cannot be parallelized or accelerated, ensuring fair leader selection and ASIC resistance.',
-        faq_q2: 'Which ZK schemes are used?',
-        faq_a2: 'A runtime‑integrated OpenZKP engine (SNARK‑friendly hashes: Knapsack, Rescue, Haraka) powers zk‑ID, private DAOs, mixers, and proof aggregation. Groth16/PLONK‑class circuits are supported with a path to universal setups.',
-        faq_q3: 'What is the network throughput?',
-        faq_a3: 'BFT finality (GRANDPA) targets 6–18s with optimized ZK aggregation enabling high tx throughput. Storage throughput scales horizontally with the number of farmers; economics modeled around ~$3/TB/year HDD/SSD participation.',
-        team_title: 'Team',
-        team_member1_role: 'Founder — Consensus & Infra Architect',
-        team_member2_role: 'Co‑Founder — ZK/DePIN, Ecosystem & Strategy',
-        team_member3_role: 'ZK Runtime & Systems Lead'
+/* 2) Переводы */
+const i18n = {
+  en: {
+    hero_title: 'Sovereign ZK Infrastructure for Storage & Compute',
+    hero_sub: 'Proof‑of‑Space + VDF consensus. Privacy at Layer‑1. Modular Substrate stack. We welcome voluntary early contributions to accelerate Testnet → Mainnet.',
+    hero_point1: 'Green, fair, ASIC‑resistant consensus',
+    hero_point2: 'Privacy by default, not a rollup',
+    hero_point3: 'HDD/SSD mining, no GPUs',
+    hero_point4: 'Substrate • WASM • ink! • IBC',
+    tech_consensus: 'Proof‑of‑Space + dual VDF with GRANDPA finality. Fair timing, Sybil‑resistant, energy‑efficient.',
+    tech_c1: '1 TB min entry • no staking • no GPUs',
+    tech_c2: 'Deterministic time via VDF • anti‑front‑running',
+    tech_c3: 'Honest leader election • ASIC resistance',
+    tech_privacy: 'OpenZKP integrated at runtime (ZK‑ID, private DAOs, proof aggregation) — privacy at L1.',
+    tech_p1: 'SNARK‑friendly hashes: Knapsack, Rescue, Haraka',
+    tech_p2: 'Groth16/PLONK‑class circuits • aggregation',
+    tech_p3: 'No rollup dependency • L1‑native privacy',
+    tech_stack: 'Substrate node, GUI/CLI, browser signer, Nix/Docker CI — production‑ready from day one.',
+    tech_s1: 'GTK4 Desktop (30 MB) • cross‑platform',
+    tech_s2: 'Reproducible Nix • multistage Docker',
+    tech_s3: 'GitHub Actions • telemetry • monitoring',
+    token_title: 'Token & Contribution Model',
+    token_point1: 'Ticker: UBS • Fixed supply 1B • Emission ~7 years',
+    token_point2: 'Distribution: Farmers 45% • Validators 20% • Ecosystem 10% • Team 10% • Strategic & Liquidity 15%',
+    token_point3: 'No public sales, no SAFE/SAFT • Access via voluntary, off‑chain contributions',
+    token_point4: 'Early contributions are voluntary and off‑chain, intended to accelerate Testnet → Mainnet',
+    contrib_how: 'How to participate',
+    contrib_step1: 'Review the docs (Pitch, Litepaper, Tech WP, Legal Memo)',
+    contrib_step2: 'Send intro with background & intent (ecosystem, infra, strategic)',
+    contrib_step3: 'Proceed with an off‑chain contribution letter (non‑binding, voluntary)',
+    contact_title: 'Get in touch / Join Early Contributions',
+    contact_text: 'Ecosystem builders, infrastructure partners, and strategic contributors are welcome. Send a short intro and we’ll follow up with contribution details.',
+    legal_is: 'Open‑source L1 protocol. Utility‑only token for mining & services. Community‑driven development.',
+    legal_not: 'Not a company, fund, or public offering. No token sales, no guarantees, no financial products.',
+    legal_disclaimer: 'Participation is voluntary and at your own risk. Docs are informational; code governs.',
+    faq_title: 'Tech FAQ',
+    faq_q1: 'How does PoSpace + dual VDF work?',
+    faq_a1: 'Farmers pre‑allocate real disk space (e.g., 1 TB) and prove it via PoSpace. When a plot qualifies, a two‑stage VDF enforces sequential compute time that cannot be parallelized or accelerated, ensuring fair leader selection and ASIC resistance.',
+    faq_q2: 'Which ZK schemes are used?',
+    faq_a2: 'A runtime‑integrated OpenZKP engine (SNARK‑friendly hashes: Knapsack, Rescue, Haraka) powers zk‑ID, private DAOs, mixers, and proof aggregation. Groth16/PLONK‑class circuits are supported with a path to universal setups.',
+    faq_q3: 'What is the network throughput?',
+    faq_a3: 'BFT finality (GRANDPA) targets 6–18s with optimized ZK aggregation enabling high tx throughput. Storage throughput scales horizontally with the number of farmers; economics modeled around ~$3/TB/year HDD/SSD participation.',
+    team_title: 'Team',
+    team_member1_role: 'Founder — Consensus & Infra Architect',
+    team_member2_role: 'Co‑Founder — ZK/DePIN, Ecosystem & Strategy',
+    team_member3_role: 'ZK Runtime & Systems Lead',
 
-        docs_title: 'Documentation',
-docs_pitch_title: 'Pitch Deck (EN)',
-docs_pitch_desc: 'Slides overview for investors',
-docs_legal_title: 'Legal & Regulatory Memo',
-docs_legal_desc: 'Positioning & exclusions',
-docs_lite_title: 'Litepaper (EN)',
-docs_lite_desc: '8-page executive summary',
-docs_doctrine_title: 'Doctrine of Infrastructure Anarchism',
-docs_doctrine_desc: 'Philosophy & principles',
-docs_white_title: 'Technical Whitepaper (EN)',
-docs_white_desc: 'Consensus, ZK runtime, stack',
-docs_linktree_title: 'Linktree',
-docs_linktree_desc: 'All links in one place',
-      },
-      ru: {
-  hero_title: 'Суверенная ZK‑инфраструктура для хранения и вычислений',
-  hero_sub: 'Консенсус Proof‑of‑Space + VDF. Приватность на уровне L1. Модульный стек Substrate. Мы открыты к добровольным ранним взносам для ускорения Testnet → Mainnet.',
-  hero_point1: 'Зелёный, честный, ASIC‑резистентный консенсус',
-  hero_point2: 'Приватность по умолчанию, не через rollup',
-  hero_point3: 'Майнинг на HDD/SSD, без GPU',
-  hero_point4: 'Substrate • WASM • ink! • IBC',
-  tech_consensus: 'Proof‑of‑Space + двойной VDF и финальность GRANDPA. Честное время, устойчивость к Sybil, энергоэффективность.',
-  tech_c1: 'Минимум 1 ТБ • без стейкинга • без GPU',
-  tech_c2: 'Детерминированное время через VDF • анти‑фронт‑ран',
-  tech_c3: 'Честный выбор лидера • устойчивость к ASIC',
-  tech_privacy: 'OpenZKP встроен в рантайм (ZK‑ID, приватные DAO, агрегация доказательств) — приватность на L1.',
-  tech_p1: 'SNARK‑friendly хэши: Knapsack, Rescue, Haraka',
-  tech_p2: 'Схемы Groth16/PLONK • агрегация',
-  tech_p3: 'Без зависимости от rollup • приватность на L1',
-  tech_stack: 'Узел Substrate, GUI/CLI, браузерный signer, Nix/Docker CI — готово к продакшену.',
-  tech_s1: 'GTK4 Desktop (30 МБ) • кроссплатформенно',
-  tech_s2: 'Воспроизводимые окружения Nix • мульти‑стейдж Docker',
-  tech_s3: 'GitHub Actions • телеметрия • мониторинг',
-  token_title: 'Токен и модель вкладов',
-  token_point1: 'Тикер: UBS • Фиксированная эмиссия 1B • Выпуск ~7 лет',
-  token_point2: 'Распределение: Фермеры 45% • Валидаторы 20% • Экосистема 10% • Команда 10% • Стратегия и ликвидность 15%',
-  token_point3: 'Без публичных продаж, без SAFE/SAFT • Доступ через добровольные оффчейн‑вклады',
-  token_point4: 'Ранние взносы добровольные и оффчейн, предназначены для ускорения Testnet → Mainnet',
-  contrib_how: 'Как присоединиться',
-  contrib_step1: 'Ознакомьтесь с документами (Pitch, Litepaper, Tech WP, Legal Memo)',
-  contrib_step2: 'Пришлите краткое интро и роль (экосистема, инфраструктура, стратегия)',
-  contrib_step3: 'Оформим оффчейн‑письмо о вкладе (необязывающее, добровольное)',
-  contact_title: 'Связаться / Присоединиться к ранним взносам',
-  contact_text: 'Приглашаем билдеров экосистемы, инфраструктурных партнёров и стратегических контрибьюторов. Отправьте интро и мы ответим деталями.',
-  legal_is: 'Открытый L1‑протокол. Токен утилитарный: майнинг и сервисы. Развитие силами комьюнити.',
-  legal_not: 'Это не компания, не фонд и не публичное предложение. Нет продаж токенов, гарантий или финансовых продуктов.',
-  legal_disclaimer: 'Участие добровольное и на ваш риск. Документы информационные; управляет код.',
-  faq_title: 'Технический FAQ',
-  faq_q1: 'Как работает PoSpace + двойной VDF?',
-  faq_a1: 'Фермеры заранее выделяют реальное дисковое пространство (например, 1 ТБ) и доказывают это через PoSpace. При квалификации участка двухэтапный VDF навязывает последовательное вычисление, которое нельзя распараллелить, обеспечивая честный выбор лидера и устойчивость к ASIC.',
-  faq_q2: 'Какие ZK‑схемы используются?',
-  faq_a2: 'Встроенный в рантайм OpenZKP‑движок (SNARK‑friendly хэши: Knapsack, Rescue, Haraka) обеспечивает zk‑ID, приватные DAO, миксеры и агрегацию доказательств. Поддерживаются схемы уровня Groth16/PLONK с переходом к универсальным сетапам.',
-  faq_q3: 'Какова пропускная способность сети?',
-  faq_a3: 'BFT‑финальность (GRANDPA) нацелена на 6–18 с с оптимизированной ZK‑агрегацией для высокой транзакционной пропускной способности. Пропускная способность хранения масштабируется горизонтально числом фермеров; экономика смоделирована вокруг ~$3/ТБ/год на HDD/SSD.',
-  team_title: 'Команда',
-  team_member1_role: 'Архитектор UBS ZK Space (консенсус и инфраструктура)',
-  team_member2_role: 'Со‑основатель — ZK/DePIN, экосистема и стратегия',
-  team_member3_role: 'Руководитель ZK Runtime & Systems',
+    /* Docs (EN) */
+    docs_title: 'Documentation',
+    docs_pitch_title: 'Pitch Deck (EN)',
+    docs_pitch_desc: 'Slides overview for investors',
+    docs_legal_title: 'Legal & Regulatory Memo',
+    docs_legal_desc: 'Positioning & exclusions',
+    docs_lite_title: 'Litepaper (EN)',
+    docs_lite_desc: '8-page executive summary',
+    docs_doctrine_title: 'Doctrine of Infrastructure Anarchism',
+    docs_doctrine_desc: 'Philosophy & principles',
+    docs_white_title: 'Technical Whitepaper (EN)',
+    docs_white_desc: 'Consensus, ZK runtime, stack',
+    docs_linktree_title: 'Linktree',
+    docs_linktree_desc: 'All links in one place'
+  },
 
-  /* --- Документация --- */
-  docs_title: 'Документация',
-  docs_pitch_title: 'Презентация / Pitch Deck',
-  docs_pitch_desc: 'Ключевая информация для инвесторов',
-  docs_legal_title: 'Юридический и регуляторный обзор',
-  docs_legal_desc: 'Наша позиция и рамки деятельности',
-  docs_lite_title: 'Краткий обзор / Litepaper',
-  docs_lite_desc: 'Главное о проекте на 8 страницах',
-  docs_doctrine_title: 'Философия проекта',
-  docs_doctrine_desc: 'Принципы инфраструктурного анархизма',
-  docs_white_title: 'Whitepaper',
-  docs_white_desc: 'Детали архитектуры: консенсус, runtime и стек',
-  docs_linktree_title: 'Все наши ссылки',
-  docs_linktree_desc: 'Телеграм для вашего удобства'
-}
-    };
-const setLang = (lang)=>{
-  currentLang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    el.textContent = (i18n[lang] && i18n[lang][key]) || el.textContent;
-  });
+  ru: {
+    hero_title: 'Суверенная ZK‑инфраструктура для хранения и вычислений',
+    hero_sub: 'Консенсус Proof‑of‑Space + VDF. Приватность на уровне L1. Модульный стек Substrate. Мы открыты к добровольным ранним взносам для ускорения Testnet → Mainnet.',
+    hero_point1: 'Зелёный, честный, ASIC‑резистентный консенсус',
+    hero_point2: 'Приватность по умолчанию, не через rollup',
+    hero_point3: 'Майнинг на HDD/SSD, без GPU',
+    hero_point4: 'Substrate • WASM • ink! • IBC',
+    tech_consensus: 'Proof‑of‑Space + двойной VDF и финальность GRANDPA. Честное время, устойчивость к Sybil, энергоэффективность.',
+    tech_c1: 'Минимум 1 ТБ • без стейкинга • без GPU',
+    tech_c2: 'Детерминированное время через VDF • анти‑фронт‑ран',
+    tech_c3: 'Честный выбор лидера • устойчивость к ASIC',
+    tech_privacy: 'OpenZKP встроен в рантайм (ZK‑ID, приватные DAO, агрегация доказательств) — приватность на L1.',
+    tech_p1: 'SNARK‑friendly хэши: Knapsack, Rescue, Haraka',
+    tech_p2: 'Схемы Groth16/PLONK • агрегация',
+    tech_p3: 'Без зависимости от rollup • приватность на L1',
+    tech_stack: 'Узел Substrate, GUI/CLI, браузерный signer, Nix/Docker CI — готово к продакшену.',
+    tech_s1: 'GTK4 Desktop (30 МБ) • кроссплатформенно',
+    tech_s2: 'Воспроизводимые окружения Nix • мульти‑стейдж Docker',
+    tech_s3: 'GitHub Actions • телеметрия • мониторинг',
+    token_title: 'Токен и модель вкладов',
+    token_point1: 'Тикер: UBS • Фиксированная эмиссия 1B • Выпуск ~7 лет',
+    token_point2: 'Распределение: Фермеры 45% • Валидаторы 20% • Экосистема 10% • Команда 10% • Стратегия и ликвидность 15%',
+    token_point3: 'Без публичных продаж, без SAFE/SAFT • Доступ через добровольные оффчейн‑вклады',
+    token_point4: 'Ранние взносы добровольные и оффчейн, предназначены для ускорения Testnet → Mainnet',
+    contrib_how: 'Как присоединиться',
+    contrib_step1: 'Ознакомьтесь с документами (Pitch, Litepaper, Tech WP, Legal Memo)',
+    contrib_step2: 'Пришлите краткое интро и роль (экосистема, инфраструктура, стратегия)',
+    contrib_step3: 'Оформим оффчейн‑письмо о вкладе (необязывающее, добровольное)',
+    contact_title: 'Связаться / Присоединиться к ранним взносам',
+    contact_text: 'Приглашаем билдеров экосистемы, инфраструктурных партнёров и стратегических контрибьюторов. Отправьте интро и мы ответим деталями.',
+    legal_is: 'Открытый L1‑протокол. Токен утилитарный: майнинг и сервисы. Развитие силами комьюнити.',
+    legal_not: 'Это не компания, не фонд и не публичное предложение. Нет продаж токенов, гарантий или финансовых продуктов.',
+    legal_disclaimer: 'Участие добровольное и на ваш риск. Документы информационные; управляет код.',
+    faq_title: 'Технический FAQ',
+    faq_q1: 'Как работает PoSpace + двойной VDF?',
+    faq_a1: 'Фермеры заранее выделяют реальное дисковое пространство (например, 1 ТБ) и доказывают это через PoSpace. При квалификации участка двухэтапный VDF навязывает последовательное вычисление, которое нельзя распараллелить, обеспечивая честный выбор лидера и устойчивость к ASIC.',
+    faq_q2: 'Какие ZK‑схемы используются?',
+    faq_a2: 'Встроенный в рантайм OpenZKP‑движок (SNARK‑friendly хэши: Knapsack, Rescue, Haraka) обеспечивает zk‑ID, приватные DAO, миксеры и агрегацию доказательств. Поддерживаются схемы уровня Groth16/PLONK с переходом к универсальным сетапам.',
+    faq_q3: 'Какова пропускная способность сети?',
+    faq_a3: 'BFT‑финальность (GRANDPA) нацелена на 6–18 с с оптимизированной ZK‑агрегацией для высокой транзакционной пропускной способности. Пропускная способность хранения масштабируется горизонтально числом фермеров; экономика смоделирована вокруг ~$3/ТБ/год на HDD/SSD.',
+    team_title: 'Команда',
+    team_member1_role: 'Архитектор UBS ZK Space (консенсус и инфраструктура)',
+    team_member2_role: 'Со‑основатель — ZK/DePIN, экосистема и стратегия',
+    team_member3_role: 'Руководитель ZK Runtime & Systems',
+
+    /* Docs (RU) */
+    docs_title: 'Документация',
+    docs_pitch_title: 'Презентация / Pitch Deck',
+    docs_pitch_desc: 'Ключевая информация для инвесторов',
+    docs_legal_title: 'Юридический и регуляторный обзор',
+    docs_legal_desc: 'Наша позиция и рамки деятельности',
+    docs_lite_title: 'Краткий обзор / Litepaper',
+    docs_lite_desc: 'Главное о проекте на 8 страницах',
+    docs_doctrine_title: 'Философия проекта',
+    docs_doctrine_desc: 'Принципы инфраструктурного анархизма',
+    docs_white_title: 'Whitepaper',
+    docs_white_desc: 'Детали архитектуры: консенсус, runtime и стек',
+    docs_linktree_title: 'Все наши ссылки',
+    docs_linktree_desc: 'Телеграм для вашего удобства'
+  }
 };
-    document.getElementById('btnEN').onclick=()=>setLang('en');
-    document.getElementById('btnRU').onclick=()=>setLang('ru');
-    setLang(currentLang);
+
+const setLang = (lang) => {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key] !== undefined) {
+      el.textContent = i18n[lang][key];
+    }
+  });
+  localStorage.setItem('lang', lang);
+};
+
+document.getElementById('btnEN').onclick = () => setLang('en');
+document.getElementById('btnRU').onclick = () => setLang('ru');
+setLang(currentLang);
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
