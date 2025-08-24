@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Фон -->
+  <rect width="512" height="512" fill="#0b1020"/>
+  <!-- Ореол -->
+  <circle cx="256" cy="256" r="200" stroke="url(#halo)" stroke-width="40" fill="none"/>
+  <!-- Ядро -->
+  <circle cx="256" cy="256" r="100" fill="url(#core)" />
+  <defs>
+    <!-- Градиент ядра -->
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD34E"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </radialGradient>
+    <!-- Градиент ореола -->
+    <linearGradient id="halo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00CFFF"/>
+      <stop offset="100%" stop-color="#0066FF"/>
+    </linearGradient>
+  </defs>
+</svg>
