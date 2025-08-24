@@ -651,25 +651,47 @@ const i18n = {
   }
 };
 
-const setLang = (lang) => {
-  currentLang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (i18n[lang] && i18n[lang][key] !== undefined) {
-      el.textContent = i18n[lang][key];
-    }
-  });
+<script>
+  // текущее значение языка (читаем сохранённое)
+  let currentLang = localStorage.getItem('lang') || 'en';
 
-  // обновляем скрытое поле формы, чтобы оно уехало в Telegram
-  const cl = document.getElementById('contactLang');
-  if (cl) cl.value = lang;
+  // визуальная подсветка активной кнопки
+  const markLangBtn = () => {
+    const btnEN = document.getElementById('btnEN');
+    const btnRU = document.getElementById('btnRU');
+    if (btnEN) btnEN.classList.toggle('is-active', currentLang === 'en');
+    if (btnRU) btnRU.classList.toggle('is-active', currentLang === 'ru');
+  };
 
-  localStorage.setItem('lang', lang);
-};
+  // применить язык ко всему, что отмечено data-i18n
+  const setLang = (lang) => {
+    currentLang = lang;
 
-document.getElementById('btnEN').onclick = () => setLang('en');
-document.getElementById('btnRU').onclick = () => setLang('ru');
-setLang(currentLang);
+    // обновляем все тексты
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (i18n[lang] && i18n[lang][k] !== undefined) {
+        el.textContent = i18n[lang][k];
+      }
+    });
+
+    // если есть скрытое поле языка в форме — обновим
+    const cl = document.getElementById('contactLang');
+    if (cl) cl.value = lang;
+
+    // сохранить выбор и подсветить активную кнопку
+    localStorage.setItem('lang', lang);
+    markLangBtn();
+  };
+
+  // обработчики кликов по EN/RU
+  document.getElementById('btnEN')?.addEventListener('click', () => setLang('en'));
+  document.getElementById('btnRU')?.addEventListener('click', () => setLang('ru'));
+
+  // первичное применение при загрузке
+  setLang(currentLang);
+</script>
+
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
