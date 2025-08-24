@@ -20,6 +20,26 @@
     .shadow-soft{box-shadow:0 10px 30px rgba(10,20,40,.3)}
     .flag{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.1);padding:.35rem .6rem;border-radius:.6rem}
     .prose li{margin-left:1rem}
+    [data-doc] {
+  transition: all .25s ease;
+  cursor: pointer;
+}
+[data-doc]:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,200,255,0.25);
+  border-color: rgba(0,200,255,.3) !important;
+}
+[data-doc] .text-lg {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+[data-doc] .text-lg::after {
+  content:"↗";
+  font-size:0.9rem;
+  opacity:0.8;
+  margin-left:6px;
+}
   </style>
   <!-- Favicon -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
