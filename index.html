@@ -10,28 +10,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .card-glow {
+.card-glow {
   position: relative;
-  overflow: hidden;
   z-index: 0;
+  overflow: hidden;
 }
 
+/* Постоянный голубо-фиолетовый glow */
 .card-glow::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  z-index: -1;
+  content:"";
+  position:absolute;
+  inset:-2px;
   border-radius: inherit;
+  z-index:-1;
   background: linear-gradient(135deg, #46c2ff, #8b5cf6, #46c2ff);
-  background-size: 200% 200%;
+  background-size:200% 200%;
   filter: blur(20px);
-  opacity: 0.35;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity:0.45;
+  transition: background .35s ease, opacity .35s ease, transform .35s ease;
 }
 
+/* Hover → зелёный матричный */
 .card-glow:hover::before {
-  opacity: 0.75;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #00ff99, #009944, #00ff99);
+  opacity:0.75;
+  transform: scale(1.03);
 }
 
     :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
