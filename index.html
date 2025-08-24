@@ -10,44 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-/* Нижнее свечение для карточек в HERO (как в Docs) */
-.hero-glow {
-  position: relative;
-  z-index: 0;           /* создаём слой для псевдоэлемента */
+/* постоянный glow + зелёный на ховере */
+.hero-glow{
+  box-shadow: 0 8px 20px rgba(0,200,255,.22);
+  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  will-change: transform, box-shadow;
 }
-
-/* постоянная циановая “полоса-аура” под карточкой */
-.hero-glow::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: -18px;
-  height: 42px;
-  border-radius: 999px;
-  background: radial-gradient(60% 100% at 50% 0%,
-              rgba(70,194,255,.55) 0%, rgba(70,194,255,0) 70%);
-  filter: blur(10px);
-  opacity: .9;
-  z-index: -1;          /* под карточкой, но видно вокруг неё */
-  transition: background .25s ease, opacity .25s ease, transform .25s ease;
-}
-
-/* hover → матрично‑зелёный */
-.hero-glow:hover::after {
-  background: radial-gradient(60% 100% at 50% 0%,
-              rgba(0,255,140,.6) 0%, rgba(0,255,140,0) 70%);
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-/* чуть усилим рамку при ховере, не трогая фон карточки */
-.hero-glow:hover {
+.hero-glow:hover{
+  box-shadow: 0 12px 28px rgba(0,255,140,.32);
   border-color: rgba(0,255,140,.35) !important;
-}
-
-@media (prefers-reduced-motion: reduce){
-  .hero-glow::after { transition: none; }
+  transform: translateY(-2px);
 }
 
     :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
@@ -164,25 +136,25 @@
   <div class="grid grid-cols-2 gap-4 text-sm">
     
     <!-- Card 1 -->
-    <div class="p-4 rounded-xl bg-white/5 hero-glow">
+    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hero-glow">
       <div class="text-2xl font-bold">PoSpace + VDF</div>
       <div class="muted mt-1" data-i18n="hero_point1">Green, fair, ASIC-resistant consensus</div>
     </div>
 
     <!-- Card 2 -->
-    <div class="p-4 rounded-xl bg-white/5 card-glow">
+    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hero-glow">
       <div class="text-2xl font-bold">ZK-native L1</div>
       <div class="muted mt-1" data-i18n="hero_point2">Privacy by default, not a rollup</div>
     </div>
 
     <!-- Card 3 -->
-    <div class="p-4 rounded-xl bg-white/5 card-glow">
+    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hero-glow">
       <div class="text-2xl font-bold">$3/TB/yr</div>
       <div class="muted mt-1" data-i18n="hero_point3">HDD/SSD mining, no GPUs</div>
     </div>
 
     <!-- Card 4 -->
-    <div class="p-4 rounded-xl bg-white/5 card-glow">
+    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hero-glow">
       <div class="text-2xl font-bold">Modular</div>
       <div class="muted mt-1" data-i18n="hero_point4">Substrate • WASM • ink! • IBC</div>
     </div>
