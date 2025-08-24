@@ -10,6 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+/* Matrix overlay on hero panel */
+#heroPanel { position: relative; overflow: hidden; }
+#matrixRain{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  pointer-events:none;           /* клики проходят сквозь */
+  opacity:0;                     /* скрыт по умолчанию */
+  transition: opacity .25s ease;
+  mix-blend-mode: screen;        /* мягкое наложение */
+}
+.matrix-active #matrixRain{ opacity:.32; }  /* интенсивность дождя */
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #matrixRain{ display:none; }
+}
 /* постоянный glow + зелёный на ховере */
 .hero-glow{
   box-shadow: 0 8px 20px rgba(0,200,255,.22);
@@ -201,7 +217,9 @@
         </div>
         <p class="mt-4 text-sm muted">Open‑source protocol • No token sale • Utility‑only</p>
       </div>
-      <div class="glass rounded-2xl p-6 border grid gap-4">
+      <div id="heroPanel" class="glass rounded-2xl p-6 border grid gap-4">
+  <!-- matrix overlay -->
+  <canvas id="matrixRain" aria-hidden="true"></canvas>
   <div class="grid grid-cols-2 gap-4 text-sm">
     
     <!-- Card 1 -->
@@ -680,7 +698,78 @@ const i18n = {
 
   // Первичная инициализация
   setLang(currentLang);
+// ===== Matrix rain on CTA hover =====
+(function(){
+  const panel = document.getElementById('heroPanel');
+  const canvas = document.getElementById('matrixRain');
+  if (!panel || !canvas) return;
 
+  const ctx = canvas.getContext('2d');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let running = false, raf = null;
+  const fontSize = 16;
+  let columns = 0, drops = [];
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = panel.clientWidth, h = panel.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    columns = Math.floor(w / fontSize);
+    drops = new Array(columns).fill(0);
+  }
+
+  const chars = '01アカサタナハマヤラワ0123456789アイウエオカキクケコ';
+
+  function draw() {
+    // лёгкий след
+    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = 'rgba(0,255,140,0.85)'; // matrix green
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i=0; i<drops.length; i++){
+      const text = chars.charAt(Math.floor(Math.random() * chars.length));
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+      ctx.fillText(text, x, y);
+
+      if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+    raf = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    if (prefersReduced || running) return;
+    running = true;
+    panel.classList.add('matrix-active');
+    resize();
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    raf = requestAnimationFrame(draw);
+  }
+
+  function stop() {
+    if (!running) return;
+    running = false;
+    panel.classList.remove('matrix-active');
+    cancelAnimationFrame(raf);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+
+  window.addEventListener('resize', () => { if (running) resize(); });
+
+  const cta = document.querySelector('.btn-cta');
+  cta?.addEventListener('mouseenter', start);
+  cta?.addEventListener('mouseleave', stop);
+  cta?.addEventListener('focus', start);
+  cta?.addEventListener('blur', stop);
+  // touch — показать коротко
+  cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
+})();
+  
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
   
