@@ -84,6 +84,70 @@
     "description": "Sovereign L1 for ZK storage & compute. PoSpace + VDF, privacy at L1.",
     "foundingDate": "2025"
   }
+/* ===== Primary CTA (Join Early Contributions) ===== */
+.btn-cta{
+  position: relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  color:#0b1020;
+  background: linear-gradient(90deg, #46c2ff, #8b5cf6);
+  box-shadow: 0 10px 24px rgba(70,194,255,.28);
+  border:1px solid rgba(255,255,255,.12);
+  overflow:hidden;
+  transition: transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  will-change: transform, box-shadow;
+}
+
+/* пробегающий блик */
+.btn-cta::after{
+  content:"";
+  position:absolute; top:0; bottom:0; width:40%;
+  left:-60%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  filter: blur(6px);
+  transition: left .6s ease;
+}
+.btn-cta:hover::after{ left:120%; }
+
+/* hover → matrix green */
+.btn-cta:hover{
+  background: linear-gradient(90deg, #00ff99, #00b36b);
+  box-shadow: 0 12px 30px rgba(0,255,140,.35);
+  border-color: rgba(0,255,140,.45);
+  transform: translateY(-2px);
+}
+
+.btn-cta:active{ transform: translateY(0); }
+.btn-cta:focus-visible{
+  outline: 2px solid rgba(70,194,255,.6);
+  outline-offset: 2px;
+}
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn-cta, .btn-cta::after{ transition:none; }
+}
+
+/* ===== Опционально: строгая версия с градиентной рамкой ===== */
+.btn-cta--outline{
+  background: rgba(255,255,255,.03);
+  color:#e8eefc;
+  box-shadow: 0 8px 20px rgba(70,194,255,.18);
+}
+.btn-cta--outline::before{
+  content:"";
+  position:absolute; inset:0; padding:1px; border-radius:inherit;
+  background: linear-gradient(90deg, #46c2ff, #8b5cf6);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; /* только рамка */
+}
+.btn-cta--outline:hover::before{ background: linear-gradient(90deg, #00ff99, #00b36b); }
+.btn-cta--outline:hover{
+  box-shadow: 0 12px 28px rgba(0,255,140,.28);
+  border-color: transparent;
+}
   </script>
 </head>
 <body>
@@ -128,7 +192,7 @@
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📄 Pitch Deck</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📘 Litepaper</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">⚙️ Technical WP</a>
-          <a href="#contact" class="px-5 py-2 rounded-xl gradient shadow-soft font-semibold">Join Early Contributions</a>
+          <a href="#contact" class="btn-cta" data-i18n="cta_join">Join Early Contributions</a>
         </div>
         <p class="mt-4 text-sm muted">Open‑source protocol • No token sale • Utility‑only</p>
       </div>
