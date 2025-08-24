@@ -10,31 +10,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-.card-glow {
+/* Нижнее свечение для карточек в HERO (как в Docs) */
+.hero-glow {
   position: relative;
-  z-index: 0;
-  overflow: hidden;
+  z-index: 0;           /* создаём слой для псевдоэлемента */
 }
 
-/* Постоянный голубо-фиолетовый glow */
-.card-glow::before {
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius: inherit;
-  z-index:-1;
-  background: linear-gradient(135deg, #46c2ff, #8b5cf6, #46c2ff);
-  background-size:200% 200%;
-  filter: blur(20px);
-  opacity:0.45;
-  transition: background .35s ease, opacity .35s ease, transform .35s ease;
+/* постоянная циановая “полоса-аура” под карточкой */
+.hero-glow::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -18px;
+  height: 42px;
+  border-radius: 999px;
+  background: radial-gradient(60% 100% at 50% 0%,
+              rgba(70,194,255,.55) 0%, rgba(70,194,255,0) 70%);
+  filter: blur(10px);
+  opacity: .9;
+  z-index: -1;          /* под карточкой, но видно вокруг неё */
+  transition: background .25s ease, opacity .25s ease, transform .25s ease;
 }
 
-/* Hover → зелёный матричный */
-.card-glow:hover::before {
-  background: linear-gradient(135deg, #00ff99, #009944, #00ff99);
-  opacity:0.75;
-  transform: scale(1.03);
+/* hover → матрично‑зелёный */
+.hero-glow:hover::after {
+  background: radial-gradient(60% 100% at 50% 0%,
+              rgba(0,255,140,.6) 0%, rgba(0,255,140,0) 70%);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* чуть усилим рамку при ховере, не трогая фон карточки */
+.hero-glow:hover {
+  border-color: rgba(0,255,140,.35) !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-glow::after { transition: none; }
 }
 
     :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
@@ -151,7 +164,7 @@
   <div class="grid grid-cols-2 gap-4 text-sm">
     
     <!-- Card 1 -->
-    <div class="p-4 rounded-xl bg-white/5 card-glow">
+    <div class="p-4 rounded-xl bg-white/5 hero-glow">
       <div class="text-2xl font-bold">PoSpace + VDF</div>
       <div class="muted mt-1" data-i18n="hero_point1">Green, fair, ASIC-resistant consensus</div>
     </div>
