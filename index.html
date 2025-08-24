@@ -243,7 +243,7 @@
         </ul>
       </div>
       <div class="glass rounded-2xl p-6 border">
-        <div class="text-lg font-semibold">Protocol DEV<Protocol DEV/div>
+        <div class="text-lg font-semibold">Protocol Dev</div>
         <div class="muted text-sm" data-i18n="team_member3_role">ZK Runtime & Systems Lead</div>
         <ul class="text-sm muted mt-3 list-disc pl-4">
           <li>zk‑circuits, Substrate runtime, modular L1 design</li>
@@ -437,16 +437,17 @@ let currentLang = localStorage.getItem('lang') || 'en';
         team_member3_role: 'Руководитель ZK Runtime & Systems'
       }
     };
-    const setLang = (lang)=>{
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.getAttribute('data-i18n');
-        el.textContent = i18n[lang][key] || el.textContent;
-      });
-      setLang(currentLang);
-    };
+const setLang = (lang)=>{
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    el.textContent = (i18n[lang] && i18n[lang][key]) || el.textContent;
+  });
+  localStorage.setItem('lang', lang);
+};
     document.getElementById('btnEN').onclick=()=>setLang('en');
     document.getElementById('btnRU').onclick=()=>setLang('ru');
-    setLang(localStorage.getItem('lang')||'en');
+     localStorage.setItem('lang', lang);
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
