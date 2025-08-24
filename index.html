@@ -20,6 +20,8 @@
   z-index: 2;              /* <-- чтобы был поверх карточек */
 }
 .matrix-active #matrixRain{ opacity:.32; }
+    /* ограничиваем канвас рамками панели */
+#heroPanel { position: relative; overflow: hidden; }
 
 /* уважение к reduced motion */
 @media (prefers-reduced-motion: reduce){
@@ -246,7 +248,7 @@
     </div>
 
   </div>
-  <a href="https://linktr.ee/UBSZK" target="_blank" class="link text-sm">🔗 Linktree / UBSZK</a>
+  <a href="https://linktr.ee/UBSZK" target="_blank" rel="noopener" class="link text-sm">🔗 Linktree / UBSZK</a>
 </div>
     </div>
   </section>
