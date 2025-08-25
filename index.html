@@ -32,7 +32,6 @@
   #matrixRain{ display: none; }
 }
 
-}
 /* постоянный glow + зелёный на ховере */
 .hero-glow{
   box-shadow: 0 8px 20px rgba(0,200,255,.22);
@@ -775,22 +774,20 @@ const i18n = {
 
   window.addEventListener('resize', () => { if (running) resize(); });
 
-  // триггеры
-  const cta = document.querySelector('.btn-cta');
+// триггеры
+const cta = document.querySelector('.btn-cta');
 
-  // запуск от кнопки (как было)
-  cta?.addEventListener('mouseenter', start);
-  cta?.addEventListener('mouseleave', stop);
-  cta?.addEventListener('focus', start);
-  cta?.addEventListener('blur', stop);
-  cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
+// запуск от кнопки
+cta?.addEventListener('mouseenter', start);
+cta?.addEventListener('mouseleave', stop);
+cta?.addEventListener('focus', start);
+cta?.addEventListener('blur', stop);
+cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
 
-  // + запуск от самой правой панели (на всякий случай)
-  panel.addEventListener('mouseenter', start);
-  panel.addEventListener('mouseleave', stop);
+// + запуск от правой панели
+panel.addEventListener('mouseenter', start);
+panel.addEventListener('mouseleave', stop);
 
-  // touch — показать коротко
-  cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
 })();
   
     // Year
