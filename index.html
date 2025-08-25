@@ -10,22 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-#matrixRain{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  pointer-events:none;
-  opacity:0;
-  transition: opacity .25s ease;
-  mix-blend-mode: screen;
-  z-index: 2;              /* <-- чтобы был поверх карточек */
-}
-.matrix-active #matrixRain{ opacity:.32; }
-    /* ограничиваем канвас рамками панели */
+/* Matrix overlay on hero panel */
 #heroPanel { position: relative; overflow: hidden; }
 
-/* уважение к reduced motion */
+#matrixRain{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;                       /* скрыт по умолчанию */
+  transition: opacity .25s ease;
+  mix-blend-mode: screen;
+  z-index: 10;                      /* поверх карточек */
+}
+
+/* активный режим — делаем заметнее */
+.matrix-active #matrixRain{ opacity: .55; }
+
 @media (prefers-reduced-motion: reduce){
-  #matrixRain{ display:none; }
+  #matrixRain{ display: none; }
+}
+
 }
 /* постоянный glow + зелёный на ховере */
 .hero-glow{
@@ -769,11 +775,20 @@ const i18n = {
 
   window.addEventListener('resize', () => { if (running) resize(); });
 
+  // триггеры
   const cta = document.querySelector('.btn-cta');
+
+  // запуск от кнопки (как было)
   cta?.addEventListener('mouseenter', start);
   cta?.addEventListener('mouseleave', stop);
   cta?.addEventListener('focus', start);
   cta?.addEventListener('blur', stop);
+  cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
+
+  // + запуск от самой правой панели (на всякий случай)
+  panel.addEventListener('mouseenter', start);
+  panel.addEventListener('mouseleave', stop);
+
   // touch — показать коротко
   cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
 })();
