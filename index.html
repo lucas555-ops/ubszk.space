@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
 /* Matrix overlay on hero panel */
 #heroPanel { position: relative; overflow: hidden; }
@@ -43,6 +44,32 @@
   border-color: rgba(0,255,140,.35) !important;
   transform: translateY(-2px);
 }
+@keyframes flow {
+  0% { background-position: 0% 50% }
+  100% { background-position: 200% 50% }
+}
+
+/* Анимированный градиент текста на кнопке */
+.btn-gradient-text{
+  background: linear-gradient(90deg,#00ff9d,#00e0ff,#9d00ff,#00ff9d);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  animation: flow 3s linear infinite;
+}
+
+/* На hover — “matrix-green” перелив под стиль кнопки */
+.btn-cta:hover .btn-gradient-text{
+  background: linear-gradient(90deg,#b6ffd8,#00ff99,#00b36b,#b6ffd8);
+  background-size: 200% 100%;
+}
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn-gradient-text{ animation: none; }
+}
+       
     :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
     html,body{background:linear-gradient(180deg,rgba(5,8,18,.9),rgba(5,8,18,1)) no-repeat var(--bg); color:#e8eefc; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
     .glass{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.08)}
@@ -52,7 +79,8 @@
     .muted{color:var(--muted)}
     .shadow-soft{box-shadow:0 10px 30px rgba(10,20,40,.3)}
     .flag{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.1);padding:.35rem .6rem;border-radius:.6rem}
-/* Активная кнопка языка */
+
+    /* Активная кнопка языка */
 .flag.is-active {
   border-color: rgba(70,194,255,.6);
   box-shadow: 0 0 0 2px rgba(70,194,255,.12) inset;
@@ -219,7 +247,9 @@
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📄 Pitch Deck</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📘 Litepaper</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">⚙️ Technical WP</a>
-          <a href="#contact" class="btn-cta" data-i18n="cta_join">Join Early Contributions</a>
+          <a href="#contact" class="btn-cta">
+  <span class="btn-gradient-text" data-i18n="cta_join">Join Early Contributions</span>
+</a>
         </div>
         <p class="mt-4 text-sm muted">Open‑source protocol • No token sale • Utility‑only</p>
       </div>
