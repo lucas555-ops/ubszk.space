@@ -9,30 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-/* Matrix overlay on hero panel */
-#heroPanel { position: relative; overflow: hidden; }
-
-#matrixRain{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;                       /* скрыт по умолчанию */
-  transition: opacity .25s ease;
-  mix-blend-mode: screen;
-  z-index: 10;                      /* поверх карточек */
-}
-
-/* активный режим — делаем заметнее */
-.matrix-active #matrixRain{ opacity: .55; }
-
-@media (prefers-reduced-motion: reduce){
-  #matrixRain{ display: none; }
-}
-
 /* постоянный glow + зелёный на ховере */
 .hero-glow{
   box-shadow: 0 8px 20px rgba(0,200,255,.22);
@@ -44,32 +21,63 @@
   border-color: rgba(0,255,140,.35) !important;
   transform: translateY(-2px);
 }
-@keyframes flow {
-  0% { background-position: 0% 50% }
-  100% { background-position: 200% 50% }
+/* ===== Premium CTA ===== */
+.btn-cta{
+  position: relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:600;
+  color:#0b1020;                    /* читаемый тёмный текст */
+  background: linear-gradient(90deg,#46c2ff,#8b5cf6);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 12px 26px rgba(70,194,255,.28),   /* постоянный мягкий glow */
+    inset 0 1px 0 rgba(255,255,255,.18);/* лёгкий верхний отблеск */
+  overflow:hidden;
+  transition: transform .18s ease, box-shadow .25s ease,
+              background .28s ease, border-color .28s ease;
+  will-change: transform, box-shadow, background;
 }
 
-/* Анимированный градиент текста на кнопке */
-.btn-gradient-text{
-  background: linear-gradient(90deg,#00ff9d,#00e0ff,#9d00ff,#00ff9d);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  animation: flow 3s linear infinite;
+/* градиентная рамка (только рамка, не заливает фон) */
+.btn-cta::before{
+  content:"";
+  position:absolute; inset:0; padding:1px; border-radius:inherit;
+  background: linear-gradient(90deg,#46c2ff,#8b5cf6);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:.7; pointer-events:none; transition: background .28s ease, opacity .2s ease;
 }
 
-/* На hover — “matrix-green” перелив под стиль кнопки */
-.btn-cta:hover .btn-gradient-text{
-  background: linear-gradient(90deg,#b6ffd8,#00ff99,#00b36b,#b6ffd8);
-  background-size: 200% 100%;
+/* бегущий блик */
+.btn-cta::after{
+  content:"";
+  position:absolute; top:-35%; bottom:-35%; width:28%;
+  left:-40%; transform: skewX(-20deg);
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  opacity:.22; transition: left .6s ease;
 }
 
-/* уважение к reduced motion */
+/* hover → «matrix-green», glow чуть сильнее */
+.btn-cta:hover{
+  background: linear-gradient(90deg,#00ff99,#00b36b);
+  border-color: rgba(0,255,140,.45);
+  box-shadow:
+    0 16px 38px rgba(0,255,140,.35),
+    inset 0 1px 0 rgba(255,255,255,.22);
+  transform: translateY(-2px);
+}
+.btn-cta:hover::before{ background: linear-gradient(90deg,#00ff99,#00b36b); opacity:.9; }
+.btn-cta:hover::after{ left:130%; }
+
+.btn-cta:active{ transform: translateY(0); }
+.btn-cta:focus-visible{ outline:2px solid rgba(70,194,255,.6); outline-offset:2px; }
+
 @media (prefers-reduced-motion: reduce){
-  .btn-gradient-text{ animation: none; }
+  .btn-cta, .btn-cta::after{ transition:none; }
 }
-       
     :root { --bg:#0b1020; --card:#11162a; --muted:#8ea1c0; --brand:#46c2ff; --brand2:#8b5cf6; }
     html,body{background:linear-gradient(180deg,rgba(5,8,18,.9),rgba(5,8,18,1)) no-repeat var(--bg); color:#e8eefc; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
     .glass{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.08)}
@@ -79,8 +87,7 @@
     .muted{color:var(--muted)}
     .shadow-soft{box-shadow:0 10px 30px rgba(10,20,40,.3)}
     .flag{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.1);padding:.35rem .6rem;border-radius:.6rem}
-
-    /* Активная кнопка языка */
+/* Активная кнопка языка */
 .flag.is-active {
   border-color: rgba(70,194,255,.6);
   box-shadow: 0 0 0 2px rgba(70,194,255,.12) inset;
@@ -107,70 +114,7 @@
   opacity:0.8;
   margin-left:6px;
 }
-      /* ===== Primary CTA (Join Early Contributions) ===== */
-.btn-cta{
-  position: relative;
-  display:inline-flex; align-items:center; justify-content:center;
-  padding: 14px 22px;
-  border-radius: 12px;
-  font-weight: 600;
-  color:#0b1020;
-  background: linear-gradient(90deg, #46c2ff, #8b5cf6);
-  box-shadow: 0 10px 24px rgba(70,194,255,.28);
-  border:1px solid rgba(255,255,255,.12);
-  overflow:hidden;
-  transition: transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-  will-change: transform, box-shadow;
-}
 
-/* пробегающий блик */
-.btn-cta::after{
-  content:"";
-  position:absolute; top:0; bottom:0; width:40%;
-  left:-60%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-  filter: blur(6px);
-  transition: left .6s ease;
-}
-.btn-cta:hover::after{ left:120%; }
-
-/* hover → matrix green */
-.btn-cta:hover{
-  background: linear-gradient(90deg, #00ff99, #00b36b);
-  box-shadow: 0 12px 30px rgba(0,255,140,.35);
-  border-color: rgba(0,255,140,.45);
-  transform: translateY(-2px);
-}
-
-.btn-cta:active{ transform: translateY(0); }
-.btn-cta:focus-visible{
-  outline: 2px solid rgba(70,194,255,.6);
-  outline-offset: 2px;
-}
-
-/* уважение к reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .btn-cta, .btn-cta::after{ transition:none; }
-}
-
-/* ===== Опционально: строгая версия с градиентной рамкой ===== */
-.btn-cta--outline{
-  background: rgba(255,255,255,.03);
-  color:#e8eefc;
-  box-shadow: 0 8px 20px rgba(70,194,255,.18);
-}
-.btn-cta--outline::before{
-  content:"";
-  position:absolute; inset:0; padding:1px; border-radius:inherit;
-  background: linear-gradient(90deg, #46c2ff, #8b5cf6);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude; /* только рамка */
-}
-.btn-cta--outline:hover::before{ background: linear-gradient(90deg, #00ff99, #00b36b); }
-.btn-cta--outline:hover{
-  box-shadow: 0 12px 28px rgba(0,255,140,.28);
-  border-color: transparent;
-}
   </style>
   <!-- Favicon -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -247,15 +191,11 @@
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📄 Pitch Deck</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">📘 Litepaper</a>
           <a href="#docs" class="glass chip px-4 py-2 rounded-xl hover:border-white/20">⚙️ Technical WP</a>
-          <a href="#contact" class="btn-cta">
-  <span class="btn-gradient-text" data-i18n="cta_join">Join Early Contributions</span>
-</a>
+          <a href="#contact" class="btn-cta" data-i18n="cta_join">Join Early Contributions</a>
         </div>
         <p class="mt-4 text-sm muted">Open‑source protocol • No token sale • Utility‑only</p>
       </div>
-      <div id="heroPanel" class="glass rounded-2xl p-6 border grid gap-4">
-  <!-- matrix overlay -->
-  <canvas id="matrixRain" aria-hidden="true"></canvas>
+      <div class="glass rounded-2xl p-6 border grid gap-4">
   <div class="grid grid-cols-2 gap-4 text-sm">
     
     <!-- Card 1 -->
@@ -283,7 +223,7 @@
     </div>
 
   </div>
-  <a href="https://linktr.ee/UBSZK" target="_blank" rel="noopener" class="link text-sm">🔗 Linktree / UBSZK</a>
+  <a href="https://linktr.ee/UBSZK" target="_blank" class="link text-sm">🔗 Linktree / UBSZK</a>
 </div>
     </div>
   </section>
@@ -578,7 +518,8 @@ const i18n = {
   en: {
     hero_title: 'Sovereign ZK Infrastructure for Storage & Compute',
     hero_sub: 'Proof‑of‑Space + VDF consensus. Privacy at Layer‑1. Modular Substrate stack. We welcome voluntary early contributions to accelerate Testnet → Mainnet.',
-    hero_point1: 'Green, fair, ASIC‑resistant consensus',
+    cta_join: 'Join Early Contributions',
+	hero_point1: 'Green, fair, ASIC‑resistant consensus',
     hero_point2: 'Privacy by default, not a rollup',
     hero_point3: 'HDD/SSD mining, no GPUs',
     hero_point4: 'Substrate • WASM • ink! • IBC',
@@ -642,7 +583,8 @@ const i18n = {
   ru: {
     hero_title: 'Суверенная ZK‑инфраструктура для хранения и вычислений',
     hero_sub: 'Консенсус Proof‑of‑Space + VDF. Приватность на уровне L1. Модульный стек Substrate. Мы открыты к добровольным ранним взносам для ускорения Testnet → Mainnet.',
-    hero_point1: 'Зелёный, честный, ASIC‑резистентный консенсус',
+    cta_join: 'Присоединиться к ранним взносам',
+	hero_point1: 'Зелёный, честный, ASIC‑резистентный консенсус',
     hero_point2: 'Приватность по умолчанию, не через rollup',
     hero_point3: 'Майнинг на HDD/SSD, без GPU',
     hero_point4: 'Substrate • WASM • ink! • IBC',
@@ -735,91 +677,6 @@ const i18n = {
   // Первичная инициализация
   setLang(currentLang);
 
-// ===== Matrix rain on CTA hover =====
-(function(){
-  const panel = document.getElementById('heroPanel');
-  const canvas = document.getElementById('matrixRain');
-  if (!panel || !canvas) return;
-
-  const ctx = canvas.getContext('2d');
-
-  // Если хочешь уважать системную настройку — оставь true.
-  // Чтобы эффект работал у всех, ставим false.
-  const RESPECT_REDUCED_MOTION = false;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  let running = false, raf = null;
-  const fontSize = 16;
-  let columns = 0, drops = [];
-
-  function resize() {
-    const dpr = window.devicePixelRatio || 1;
-    const w = panel.clientWidth, h = panel.clientHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    columns = Math.floor(w / fontSize);
-    drops = new Array(columns).fill(0);
-  }
-
-  const chars = '01アカサタナハマヤラワ0123456789アイウエオカキクケコ';
-
-  function draw() {
-    // лёгкий след
-    ctx.fillStyle = 'rgba(0,0,0,0.08)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    ctx.fillStyle = 'rgba(0,255,140,0.85)'; // matrix green
-    ctx.font = fontSize + 'px monospace';
-
-    for (let i=0; i<drops.length; i++){
-      const text = chars.charAt(Math.floor(Math.random() * chars.length));
-      const x = i * fontSize;
-      const y = drops[i] * fontSize;
-      ctx.fillText(text, x, y);
-
-      if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
-    }
-    raf = requestAnimationFrame(draw);
-  }
-
-  function start() {
-    if (running) return;
-    if (RESPECT_REDUCED_MOTION && prefersReduced) return;  // <-- больше не блокирует по умолчанию
-    running = true;
-    panel.classList.add('matrix-active');
-    resize();
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    raf = requestAnimationFrame(draw);
-  }
-
-  function stop() {
-    if (!running) return;
-    running = false;
-    panel.classList.remove('matrix-active');
-    cancelAnimationFrame(raf);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-  }
-
-  window.addEventListener('resize', () => { if (running) resize(); });
-
-// триггеры
-const cta = document.querySelector('.btn-cta');
-
-// запуск от кнопки
-cta?.addEventListener('mouseenter', start);
-cta?.addEventListener('mouseleave', stop);
-cta?.addEventListener('focus', start);
-cta?.addEventListener('blur', stop);
-cta?.addEventListener('touchstart', () => { start(); setTimeout(stop, 1200); }, {passive:true});
-
-// + запуск от правой панели
-panel.addEventListener('mouseenter', start);
-panel.addEventListener('mouseleave', stop);
-
-})();
-  
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
   
